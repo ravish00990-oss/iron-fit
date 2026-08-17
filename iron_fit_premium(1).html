@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRON // Aesthetic Fitness</title>
+<style>
+:root{--bg:#08090b;--card:#111318;--muted:#8e949f;--text:#f5f7fa;--accent:#b8ff4d;--line:#22252d}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 80% 0%,#1a2410 0,#08090b 35%);color:var(--text);font-family:Inter,system-ui,-apple-system,sans-serif}
+nav{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:18px 7%;background:#08090bdd;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-weight:900;letter-spacing:2px}.logo span{color:var(--accent)} nav a{color:#c8cbd1;text-decoration:none;margin-left:24px;font-size:14px}
+.hero{padding:85px 7% 60px;max-width:1200px;margin:auto}.eyebrow{color:var(--accent);font-weight:800;letter-spacing:3px;font-size:12px}.hero h1{font-size:clamp(48px,8vw,96px);line-height:.9;margin:18px 0}.hero p{max-width:600px;color:var(--muted);font-size:18px}
+.btn{border:0;border-radius:12px;padding:13px 18px;font-weight:800;cursor:pointer;background:var(--accent);color:#0a0c08}.btn.secondary{background:#1a1d23;color:#fff;border:1px solid var(--line)}
+section{max-width:1200px;margin:auto;padding:30px 7% 80px} .section-title{font-size:30px;margin-bottom:8px}.sub{color:var(--muted);margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.card{background:linear-gradient(145deg,#14171d,#0d0f13);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 18px 50px #0005}
+input{width:100%;padding:13px;margin:6px 0 12px;background:#0a0c10;border:1px solid var(--line);border-radius:10px;color:white}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.result{font-size:30px;font-weight:900;color:var(--accent);margin:12px 0}.small{color:var(--muted);font-size:13px}
+.camera{aspect-ratio:16/10;background:#070809;border-radius:16px;display:grid;place-items:center;overflow:hidden;border:1px dashed #343943}.camera video,.camera img{width:100%;height:100%;object-fit:cover}.hidden{display:none}
+.drop{padding:22px;text-align:center;border:1px dashed #3b404a;border-radius:14px;color:var(--muted);margin-top:12px}
+.food-result{display:none;margin-top:18px;padding:18px;border-radius:14px;background:#0a0d0c;border:1px solid #2b3b1c}.food-result b{color:var(--accent)}
+.workout-item{display:flex;justify-content:space-between;gap:12px;padding:15px 0;border-bottom:1px solid var(--line)} footer{text-align:center;color:var(--muted);padding:30px;border-top:1px solid var(--line)}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}nav a{margin-left:10px}.hero{padding-top:55px}}
+</style>
+<style>
+.dashboard{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}.metric{background:#0b0e12;border:1px solid var(--line);border-radius:16px;padding:18px}.metric .num{font-size:28px;font-weight:900;color:var(--accent);margin-top:5px}.progress{height:9px;background:#242830;border-radius:20px;overflow:hidden;margin:10px 0}.progress span{display:block;height:100%;width:0;background:var(--accent);transition:.3s}.tabs{display:flex;gap:8px;overflow:auto;margin:20px 0}.tab{white-space:nowrap;border:1px solid var(--line);background:#111419;color:#ddd;padding:10px 14px;border-radius:10px;cursor:pointer}.tab.active{background:var(--accent);color:#0b0d09}.exercise{display:grid;grid-template-columns:1fr 80px 75px 35px;gap:8px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.exercise input{margin:0;padding:9px}.check{width:20px;height:20px;accent-color:var(--accent)}.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.notice{padding:13px;border-radius:12px;background:#11150e;border:1px solid #2d3a20;color:#cfd8c5;margin-top:12px}@media(max-width:700px){.dashboard,.profile-grid{grid-template-columns:1fr}.exercise{grid-template-columns:1fr 65px 65px 30px}}
+</style><style>
+.food-log{display:grid;grid-template-columns:1fr 90px 90px 90px 70px;gap:8px;align-items:center;margin-top:12px}
+.food-log input{margin:0;padding:9px}.food-item{display:grid;grid-template-columns:1fr 90px 90px 90px 70px;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.nutrition-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.nut-card{padding:16px;border:1px solid var(--line);border-radius:14px;background:#0b0e12}.nut-card b{font-size:24px;color:var(--accent)}
+@media(max-width:700px){.food-log,.food-item{grid-template-columns:1fr 70px 70px 70px 45px}.nutrition-summary{grid-template-columns:1fr}}
+</style></head>
+<body>
+<nav><div class="logo">IRON<span>//</span>FIT</div><div><a href="#nutrition">Nutrition</a><a href="#workout">Workout</a></div></nav>
+
+<header class="hero">
+<div class="eyebrow">BUILD • EAT • RECOVER</div>
+<h1>YOUR BODY.<br><span style="color:var(--accent)">YOUR PLAN.</span></h1>
+<p>A clean personal fitness dashboard with calorie calculations, food-photo analysis, and your custom workout plan.</p>
+<a href="#nutrition"><button class="btn">START TRACKING</button></a>
+</header>
+
+<section id="dashboard"><h2 class="section-title">My Dashboard</h2><p class="sub">Your personal training and nutrition command center.</p><div class="dashboard">
+<div class="metric"><div class="small">Calorie Target</div><div id="dashCalories" class="num">—</div></div>
+<div class="metric"><div class="small">Protein</div><div id="dashProtein" class="num">0 g</div><div class="progress"><span id="proteinBar"></span></div><div id="proteinText" class="small">0% of target</div></div>
+<div class="metric"><div class="small">Workout Streak</div><div id="streak" class="num">0 days</div></div></div>
+<div class="card" style="margin-top:20px"><h3>Profile & Targets</h3><div class="profile-grid">
+<div><label>Goal</label><select id="goal" style="width:100%;padding:13px;background:#0a0c10;border:1px solid var(--line);border-radius:10px;color:white"><option>Lean muscle gain</option><option>Maintain</option><option>Fat loss</option></select></div>
+<div><label>Protein target (g)</label><input id="proteinTarget" type="number" value="100"></div>
+<div><label>Calorie target</label><input id="calTarget" type="number" placeholder="e.g. 1900"></div>
+<div><label>Current weight (kg)</label><input id="profileWeight" type="number" placeholder="67"></div></div>
+<button class="btn" onclick="saveProfile()">Save targets</button><div class="notice">Your progress is saved locally in this browser. Food-photo nutrition is an estimate.</div></div></section><section id="nutrition">
+<h2 class="section-title">Nutrition Tracker</h2>
+<p class="sub">Log your meals and track calories + protein throughout the day.</p>
+<div class="card">
+  <div class="food-log">
+    <input id="foodName" placeholder="Food (e.g. 2 roti)">
+    <input id="foodCal" type="number" placeholder="kcal">
+    <input id="foodProtein" type="number" placeholder="protein">
+    <input id="foodQty" placeholder="qty">
+    <button class="btn" onclick="addFood()">Add</button>
+  </div>
+  <div id="foodList"></div>
+  <div class="nutrition-summary">
+    <div class="nut-card"><div class="small">Calories eaten</div><b id="totalCal">0</b> kcal</div>
+    <div class="nut-card"><div class="small">Protein eaten</div><b id="totalProtein">0</b> g</div>
+    <div class="nut-card"><div class="small">Remaining calories</div><b id="remainingCal">0</b> kcal</div>
+  </div>
+  <div class="notice">Tip: enter the nutrition values from your food label or a reliable food database. Photo/AI estimates should be treated as approximate.</div>
+</div>
+</section>
+<h2 class="section-title">Nutrition Lab</h2><p class="sub">Estimate your daily calorie needs and track food from a photo.</p>
+<div class="grid">
+<div class="card">
+<h3>Calorie Calculator</h3>
+<div class="row"><div><label>Age</label><input id="age" type="number" placeholder="16"></div><div><label>Weight (kg)</label><input id="weight" type="number" placeholder="67"></div></div>
+<div class="row"><div><label>Height (cm)</label><input id="height" type="number" placeholder="173"></div><div><label>Activity</label><select id="activity" style="width:100%;padding:13px;margin:6px 0 12px;background:#0a0c10;border:1px solid var(--line);border-radius:10px;color:white"><option value="1.2">Low</option><option value="1.375">Light</option><option value="1.55" selected>Moderate</option><option value="1.725">High</option><option value="1.9">Very high</option></select></div></div>
+<button class="btn" onclick="calc()">Calculate</button><div id="calResult" class="result">— kcal</div><div class="small">For teens, this is only a rough estimate; growth and individual needs matter.</div>
+</div>
+
+<div class="card">
+<h3>Food Vision</h3>
+<div class="camera" id="camera"><span id="camText">Camera preview</span><video id="video" class="hidden" autoplay playsinline></video><img id="preview" class="hidden"></div>
+<div style="display:flex;gap:10px;margin-top:12px"><button class="btn" onclick="startCamera()">Open camera</button><button class="btn secondary" onclick="snap()">Capture</button></div>
+<input id="foodFile" type="file" accept="image/*" capture="environment" onchange="previewFood(event)">
+<div class="drop">Upload a food photo, or use the camera above.</div>
+<div id="foodResult" class="food-result"><b>AI analysis placeholder</b><br><span id="foodText">To make automatic calorie/protein recognition real, connect this page to a vision-capable AI API. The camera/upload UI is ready.</span></div>
+</div>
+</div>
+</section>
+
+<section id="workout"><h2 class="section-title">Workout Tracker</h2><p class="sub">Log weights and complete your working sets.</p><div class="tabs" id="dayTabs"></div><div class="card" id="trackerCard"></div></section>
+<footer>IRON//FIT • Personal fitness dashboard</footer>
+
+<script>
+function calc(){
+ const age=+document.getElementById('age').value, w=+document.getElementById('weight').value, h=+document.getElementById('height').value, a=+document.getElementById('activity').value;
+ if(!age||!w||!h){document.getElementById('calResult').textContent='Fill all fields';return}
+ // Adult Mifflin estimate shown as a rough educational estimate; teen needs differ.
+ const bmr=10*w+6.25*h-5*age+5, tdee=Math.round(bmr*a);
+ document.getElementById('calResult').textContent=tdee+' kcal/day';
+}
+let stream;
+async function startCamera(){
+ try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
+ const v=document.getElementById('video'); v.srcObject=stream; v.classList.remove('hidden'); document.getElementById('camText').classList.add('hidden');
+ }catch(e){alert('Camera permission was denied or the browser does not support camera access.')}
+}
+function snap(){
+ const v=document.getElementById('video'); if(v.classList.contains('hidden')){alert('Open the camera first.');return}
+ const c=document.createElement('canvas'); c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);
+ const img=document.getElementById('preview'); img.src=c.toDataURL('image/jpeg',.9);img.classList.remove('hidden');v.classList.add('hidden');
+ showFood();
+}
+function previewFood(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const img=document.getElementById('preview');img.src=r.result;img.classList.remove('hidden');document.getElementById('camText').classList.add('hidden');showFood()};r.readAsDataURL(f)}
+async function analyzeFoodWithAI(dataUrl){
+  const resultBox=document.getElementById('foodResult');
+  const text=document.getElementById('foodText');
+  resultBox.style.display='block';
+  text.textContent='Analyzing your food photo...';
+
+  try{
+    const r=await fetch('http://localhost:3000/api/analyze-food',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({image:dataUrl})
+    });
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'Analysis failed');
+
+    const items=(data.items||[]).map(x=>
+      `<div style="padding:8px 0;border-bottom:1px solid var(--line)">
+        <b>${escapeHtml(x.name)}</b> — ${escapeHtml(x.portion)}
+        <br><span class="small">${x.calories} kcal • ${x.protein_g} g protein</span>
+      </div>`).join('');
+
+    text.innerHTML=items+
+      `<div style="margin-top:12px"><b>Total: ${data.total_calories} kcal • ${data.total_protein_g} g protein</b></div>`+
+      `<div class="small" style="margin-top:6px">Confidence: ${escapeHtml(data.confidence||'unknown')}. ${escapeHtml(data.notes||'')}</div>`;
+  }catch(e){
+    text.innerHTML=`<b>Could not analyze photo.</b><br><span class="small">${escapeHtml(e.message)}<br>Make sure the backend is running at http://localhost:3000 and your API key is configured.</span>`;
+  }
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+function showFood(){
+  document.getElementById('foodResult').style.display='block';
+  const img=document.getElementById('preview');
+  if(img.src) analyzeFoodWithAI(img.src);
+}
+</script>
+<script>
+const plans={
+"Day 1 — Chest + Triceps":[["Incline DB Press",3,"8–12"],["Flat DB Press",3,"8–12"],["Pec Deck",3,"10–15"],["Cable Fly",2,"12–15"],["Cable Pushdown",3,"10–15"],["Overhead Extension",2,"10–15"]],
+"Day 2 — Back + Biceps":[["Lat Pulldown",3,"8–12"],["Chest-Supported Row",3,"8–12"],["Single-Arm Cable Row",3,"10–12"],["Straight-Arm Pulldown",2,"12–15"],["Incline DB Curl",3,"8–12"],["Hammer Curl",3,"8–12"],["Cable Curl",2,"10–15"]],
+"Day 3 — Legs + Shoulders":[["Squat / Leg Press",3,"8–12"],["Romanian Deadlift",3,"8–12"],["Leg Curl",3,"10–15"],["Leg Extension",2,"10–15"],["Calf Raise",3,"12–20"],["Shoulder Press",3,"8–12"],["Lateral Raise",3,"12–20"],["Rear-Delt Fly",2,"12–20"]],
+"Day 4 — Chest + Triceps":[["Flat DB / Bench Press",3,"6–10"],["Incline DB Press",3,"8–12"],["Cable Fly",3,"10–15"],["Pec Deck",2,"12–15"],["Cable Pushdown",3,"10–15"],["Overhead Extension",2,"10–15"]],
+"Day 5 — Back + Biceps":[["Pull-ups / Lat Pulldown",3,"8–12"],["Chest-Supported Row",3,"8–12"],["Single-Arm Lat Pulldown",3,"10–12"],["Straight-Arm Pulldown",2,"12–15"],["Incline DB Curl",3,"8–12"],["Hammer Curl",3,"8–12"],["Cable Curl",2,"10–15"]],
+"Day 6 — Legs + Shoulders":[["Leg Press",3,"8–12"],["Romanian Deadlift",3,"8–12"],["Leg Curl",3,"10–15"],["Leg Extension",2,"10–15"],["Calf Raise",3,"12–20"],["Shoulder Press",3,"8–12"],["Lateral Raise",3,"12–20"],["Rear-Delt Fly",2,"12–20"]]};
+let currentDay=localStorage.getItem("ironDay")||"Day 1 — Chest + Triceps";
+function saveProfile(){localStorage.setItem("ironProfile",JSON.stringify({protein:+proteinTarget.value||100,calories:+calTarget.value||0,weight:+profileWeight.value||0,goal:goal.value}));updateDashboard()}
+function updateDashboard(){let d=JSON.parse(localStorage.getItem("ironProfile")||"{}"),p=d.protein||100,logged=+localStorage.getItem("ironProtein")||0;dashCalories.textContent=d.calories?d.calories+" kcal":"—";dashProtein.textContent=logged+" g";proteinText.textContent=Math.round(logged/p*100)+"% of "+p+" g target";proteinBar.style.width=Math.min(100,logged/p*100)+"%";streak.textContent=(+localStorage.getItem("ironStreak")||0)+" days"}
+function selectDay(d){currentDay=d;localStorage.setItem("ironDay",d);renderTracker()}
+function saveSet(k,v){let x=JSON.parse(localStorage.getItem("ironSets")||"{}");x[k]={...(x[k]||{}),weight:v};localStorage.setItem("ironSets",JSON.stringify(x))}
+function toggleSet(k,v){let x=JSON.parse(localStorage.getItem("ironSets")||"{}");x[k]={...(x[k]||{}),done:v};localStorage.setItem("ironSets",JSON.stringify(x))}
+function completeWorkout(){let t=new Date().toISOString().slice(0,10);if(localStorage.getItem("ironLastWorkout")!==t){localStorage.setItem("ironLastWorkout",t);localStorage.setItem("ironStreak",(+localStorage.getItem("ironStreak")||0)+1)}updateDashboard();alert("Workout complete!")}
+function renderTracker(){let tabs=document.getElementById("dayTabs"),card=document.getElementById("trackerCard"),saved=JSON.parse(localStorage.getItem("ironSets")||"{}");tabs.innerHTML=Object.keys(plans).map(d=>`<button class="tab ${d===currentDay?"active":""}" onclick="selectDay('${d}')">${d.split(" — ")[0]}</button>`).join("");card.innerHTML="<h3>"+currentDay+"</h3><div class='small'>Keep most sets 1–2 reps from failure and use clean form.</div>"+plans[currentDay].map((e,i)=>{let k=currentDay+i;return `<div class="exercise"><b>${e[0]}</b><span class="small">${e[2]}</span><input placeholder="kg" value="${saved[k]?.weight||""}" onchange="saveSet('${k}',this.value)"><input type="checkbox" class="check" ${saved[k]?.done?"checked":""} onchange="toggleSet('${k}',this.checked)"></div>`}).join("")+"<button class='btn' style='margin-top:18px' onclick='completeWorkout()'>Complete workout</button>"}
+(function(){let d=JSON.parse(localStorage.getItem("ironProfile")||"{}");if(d.protein)proteinTarget.value=d.protein;if(d.calories)calTarget.value=d.calories;if(d.weight)profileWeight.value=d.weight;if(d.goal)goal.value=d.goal;renderTracker();updateDashboard()})();
+</script><script>
+function getFoods(){return JSON.parse(localStorage.getItem("ironFoods")||"[]")}
+function addFood(){
+ const name=document.getElementById("foodName").value.trim();
+ const cal=+document.getElementById("foodCal").value||0;
+ const protein=+document.getElementById("foodProtein").value||0;
+ const qty=document.getElementById("foodQty").value||"1";
+ if(!name)return;
+ const foods=getFoods(); foods.push({name,cal,protein,qty});
+ localStorage.setItem("ironFoods",JSON.stringify(foods));
+ foodName.value="";foodCal.value="";foodProtein.value="";foodQty.value="";
+ renderFoods();
+}
+function removeFood(i){const f=getFoods();f.splice(i,1);localStorage.setItem("ironFoods",JSON.stringify(f));renderFoods()}
+function renderFoods(){
+ const f=getFoods(), list=document.getElementById("foodList");
+ let cal=0,protein=0;
+ list.innerHTML=f.length?f.map((x,i)=>{cal+=x.cal;protein+=x.protein;return `<div class="food-item"><b>${x.name}</b><span>${x.qty}</span><span>${x.cal} kcal</span><span>${x.protein} g</span><button class="tab" onclick="removeFood(${i})">×</button></div>`}).join(""):"<p class='small' style='margin-top:18px'>No meals logged yet.</p>";
+ totalCal.textContent=Math.round(cal);totalProtein.textContent=Math.round(protein);
+ const target=+((JSON.parse(localStorage.getItem("ironProfile")||"{}")).calories||0);
+ remainingCal.textContent=target?Math.max(0,Math.round(target-cal)):"—";
+ localStorage.setItem("ironProtein",protein);
+ updateDashboard();
+}
+renderFoods();
+</script></body>
+</html>
