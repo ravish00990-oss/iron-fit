@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRON // Aesthetic Fitness</title>
+<style>
+:root{--bg:#07090d;--card:#10141b;--card2:#151a22;--text:#f5f7fa;--muted:#8d98a8;--accent:#b8ff3d;--line:#252c36}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#18220e 0,#07090d 35%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:1150px;margin:auto;padding:28px 20px 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}.brand{font-weight:900;letter-spacing:2px;font-size:24px}.brand span{color:var(--accent)}button{border:0;border-radius:12px;padding:12px 17px;font-weight:800;cursor:pointer}.cam{background:var(--accent);color:#091000}.hero{display:grid;grid-template-columns:1.4fr .8fr;gap:18px}.hero,.card{background:linear-gradient(145deg,#121720,#0d1117);border:1px solid var(--line);border-radius:22px;box-shadow:0 18px 60px #0005}.hero{padding:30px}.eyebrow{color:var(--accent);font-size:12px;font-weight:900;letter-spacing:2px}.hero h1{font-size:46px;line-height:1;margin:10px 0 15px}.hero p{color:var(--muted);max-width:650px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:25px}.stat{background:var(--card2);padding:16px;border-radius:15px}.stat b{font-size:24px;display:block}.stat small{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}.card{padding:22px}.card h2{font-size:18px;margin:0 0 15px}.progress{height:9px;background:#252b33;border-radius:99px;overflow:hidden}.bar{height:100%;background:var(--accent);width:68%}.row{display:flex;justify-content:space-between;margin:10px 0;color:var(--muted)}.row strong{color:var(--text)}input,select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#0a0d12;color:var(--text);margin:6px 0 10px}.meal{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)}.meal:last-child{border:0}.camera{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.cameraBox{max-width:650px;width:100%;background:var(--card);padding:20px;border-radius:20px}.cameraBox video{width:100%;border-radius:14px;background:#000;max-height:65vh}.actions{display:flex;gap:10px;margin-top:12px}.actions button{flex:1}.secondary{background:#252b33;color:#fff}.note{color:var(--muted);font-size:12px;margin-top:12px}.footer{text-align:center;color:#667080;margin-top:30px;font-size:12px}@media(max-width:800px){.hero,.grid{grid-template-columns:1fr}.hero h1{font-size:36px}.stats{grid-template-columns:1fr 1fr}.top{gap:12px}.cam{padding:10px 12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand">IRON <span>//</span> AESTHETIC FITNESS</div>
+    <button class="cam" onclick="openCamera()">📷 Camera</button>
+  </div>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">PREMIUM FITNESS DASHBOARD</div>
+      <h1>Build strength.<br>Build the V-taper.</h1>
+      <p>Track your training, calories and nutrition from one clean dashboard. Designed for consistent progress.</p>
+      <div class="stats">
+        <div class="stat"><b>67 kg</b><small>Current weight</small></div>
+        <div class="stat"><b>5'8"</b><small>Height</small></div>
+        <div class="stat"><b>6 / 6</b><small>Training days</small></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Today's Target</h2>
+      <div class="row"><span>Calories</span><strong>1,950 kcal</strong></div>
+      <div class="progress"><div class="bar"></div></div>
+      <div class="row"><span>Consumed</span><strong id="consumed">1,320 kcal</strong></div>
+      <div class="row"><span>Protein</span><strong>118 / 135 g</strong></div>
+      <div class="row"><span>Water</span><strong>2.1 / 3 L</strong></div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <div class="card">
+      <h2>🏋️ Workout</h2>
+      <div class="meal"><span>Pull — Back & Biceps</span><strong>Today</strong></div>
+      <div class="meal"><span>Lat Pulldown</span><strong>4 × 10</strong></div>
+      <div class="meal"><span>Seated Row</span><strong>3 × 12</strong></div>
+      <div class="meal"><span>Face Pull</span><strong>3 × 15</strong></div>
+      <div class="meal"><span>EZ Bar Curl</span><strong>3 × 10</strong></div>
+    </div>
+
+    <div class="card">
+      <h2>🥗 Nutrition</h2>
+      <label>Food / meal</label>
+      <input id="food" placeholder="e.g. 3 roti + eggs">
+      <label>Calories</label>
+      <input id="foodCal" type="number" placeholder="e.g. 450">
+      <button class="cam" style="width:100%" onclick="addFood()">+ Add meal</button>
+      <div id="meals" style="margin-top:8px"></div>
+    </div>
+
+    <div class="card">
+      <h2>📈 Progress</h2>
+      <div class="row"><span>Weekly consistency</span><strong>86%</strong></div>
+      <div class="progress"><div class="bar" style="width:86%"></div></div>
+      <div class="row"><span>Training streak</span><strong>12 days 🔥</strong></div>
+      <div class="row"><span>Goal</span><strong>Lean muscle</strong></div>
+      <div class="row"><span>Focus</span><strong>V-Taper</strong></div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>⚡ Quick Calculator</h2>
+      <label>Body weight (kg)</label><input id="bw" type="number" value="67">
+      <button class="secondary" style="width:100%" onclick="calcProtein()">Calculate protein</button>
+      <p id="proteinResult" class="note">Recommended training range: 1.6–2.0 g/kg.</p>
+    </div>
+    <div class="card">
+      <h2>📸 Progress Camera</h2>
+      <p class="note">Use the camera to take progress photos. Camera access stays in your browser; this demo does not upload photos anywhere.</p>
+      <button class="cam" onclick="openCamera()">Open camera</button>
+    </div>
+    <div class="card">
+      <h2>🎯 Daily Check-in</h2>
+      <select id="mood"><option>Energy: High</option><option>Energy: Normal</option><option>Energy: Low</option></select>
+      <select id="sleep"><option>Sleep: 8+ hours</option><option>Sleep: 6–8 hours</option><option>Sleep: under 6 hours</option></select>
+      <button class="secondary" style="width:100%" onclick="checkin()">Save check-in</button>
+      <p id="check" class="note"></p>
+    </div>
+  </div>
+  <div class="footer">IRON // Aesthetic Fitness • Your dashboard, your progress.</div>
+</div>
+
+<div class="camera" id="cameraModal">
+  <div class="cameraBox">
+    <h2>Progress Camera</h2>
+    <video id="video" autoplay playsinline></video>
+    <canvas id="canvas" style="display:none"></canvas>
+    <div class="actions">
+      <button class="cam" onclick="takePhoto()">📸 Capture</button>
+      <button class="secondary" onclick="closeCamera()">Close</button>
+    </div>
+    <p id="camNote" class="note">Camera permission may be requested by your browser.</p>
+  </div>
+</div>
+
+<script>
+let stream=null;
+function openCamera(){
+  document.getElementById('cameraModal').style.display='flex';
+  navigator.mediaDevices?.getUserMedia({video:true})
+    .then(s=>{stream=s;document.getElementById('video').srcObject=s;})
+    .catch(()=>document.getElementById('camNote').textContent='Camera permission was blocked. Allow camera access in browser settings and try again.');
+}
+function closeCamera(){
+  if(stream) stream.getTracks().forEach(t=>t.stop());
+  stream=null;document.getElementById('cameraModal').style.display='none';
+}
+function takePhoto(){
+  const v=document.getElementById('video'), c=document.getElementById('canvas');
+  if(!v.videoWidth){document.getElementById('camNote').textContent='Camera is not ready yet.';return;}
+  c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);
+  const a=document.createElement('a');a.href=c.toDataURL('image/jpeg',.92);a.download='iron-fit-progress.jpg';a.click();
+  document.getElementById('camNote').textContent='Photo captured. It was saved locally by your browser.';
+}
+function addFood(){
+  const name=document.getElementById('food').value.trim(), cal=Number(document.getElementById('foodCal').value);
+  if(!name||!cal)return;
+  const d=document.createElement('div');d.className='meal';d.innerHTML='<span>'+name.replace(/</g,'&lt;')+'</span><strong>'+cal+' kcal</strong>';
+  document.getElementById('meals').appendChild(d);
+  const c=document.getElementById('consumed');c.textContent=(Number(c.textContent.replace(/[^0-9]/g,''))+cal)+' kcal';
+  document.getElementById('food').value='';document.getElementById('foodCal').value='';
+}
+function calcProtein(){
+  const w=Number(document.getElementById('bw').value)||0;
+  document.getElementById('proteinResult').textContent='Recommended protein: '+Math.round(w*1.6)+'–'+Math.round(w*2)+' g/day.';
+}
+function checkin(){document.getElementById('check').textContent='Check-in saved for this session ✓';}
+</script>
+</body>
+</html>
